@@ -1,103 +1,60 @@
 package stepdefinitions;
 
-import java.util.List;
-import java.util.Map;
-
 import org.openqa.selenium.WebDriver;
 
 import com.qa.livestage.factory.DriverFactory;
 import com.qa.livestage.pageObjects.SignUpPage;
 
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
 public class SignUpPageSteps {
-
+	
 	WebDriver driver;
-	private SignUpPage signUpPage=new SignUpPage(DriverFactory.getDriver());
-	@Given("user on the homepage")
-	public void user_on_the_homepage() {
-		DriverFactory.getDriver().get("https://app.staging.workstatus.io/auth/login");
-	}
-
-	@Given("user follows {string}")
-	  public void user_follows(String string) {
-	   signUpPage.clickOnSignUPbutton();
-	}
-
-	@When("user fills Full Name with {string}")
-	public void user_fills_with(String fullname) {
-	   signUpPage.enterFullName(fullname);
-	}
-
-	@When("user fills Email with {string}")
-	public void user_fills_email_with(String email) {
-	   signUpPage.enteremailaddress(email);
-	}
-
-	@When("user fills PhoneNumber with {string}")
-	public void user_fills_phone_number_with(String phonenumber) {
-	   signUpPage.enterPhoneNumber(phonenumber);
-	}
-
-	@When("user fills password with {string}")
-	public void user_fills_password_with(String passWord) {
-	    signUpPage.enterPassword(passWord);
-	}
-
-	@When("user fills confirm password with {string}")
-	public void user_fills_confirm_password_with(String passWordAgain) {
-	    signUpPage.enterPasswordAgain(passWordAgain);
-	}
+	private SignUpPage signuppage=new SignUpPage(DriverFactory.getDriver());
 	
-	
-	
-	
-//	@When("user enters the following details")
-//	public void user_enters_the_following_details(DataTable dataTable) {
-//		
-//		/*List<List<String>> userdetail=dataTable.asLists(String.class);
-//		
-//		signUpPage.enteremailaddress(email);
-//		signUpPage.enterPhoneNumber(PhoneNumber1);
-//		signUpPage.enterPassword(password);
-//		signUpPage.enterPasswordAgain(Confirmpassword1);*/
-//		
-//		
-//		
-//	/*	for(List<String> e : userdetail){
-//			System.out.println(e);
-//		}*/
-//	
-//		
-//		
-//		
-//		//List<Map<String, String>> credList = dataTable.asMaps();
-//		
-//		List<List<String>> credList=dataTable.asLists(String.class);
-//		/*String email = credList.get(0).get(0);
-//		String PhoneNumber1 = credList.get(0).get(1);
-//		String password = credList.get(0).get(2);
-//		String Confirmpassword1 = credList.get(0).get(3);
-//		
-//		signUpPage.enteremailaddress(email);
-//		signUpPage.enterPhoneNumber(PhoneNumber1);
-//		signUpPage.enterPassword(password);
-//		signUpPage.enterPasswordAgain(Confirmpassword1);*/
-//		
-//		
-//		
-//	}
-
-	@When("user clicks on checkBox of Term and condition")
-	public void user_clicks_on_check_box_of_term_and_condition() {
-	    signUpPage.clickOnCheckbox();
+	@Given("user is on signup page")
+	public void user_is_on_signup_page() {
+	    DriverFactory.getDriver().get("https://app.newstaging.workstatus.io/auth/register");
 	}
 
-	@When("user clicks SignUP button")
-	public void user_clicks() {
-		  signUpPage.clickOnSignUPbuttonofsignupPage();
+	@When("user enters fullName {string}")
+	public void user_enters_full_name(String fullname1) {
+	    signuppage.enterFullName(fullname1);
 	}
 
+	@When("user enters emailAdd {string}")
+	public void user_enters_email_add(String email1) {
+	    signuppage.enteremailaddress(email1);
+	}
+
+	//@When("user select the india country code")
+//	public void user_select_the_india_country_code() {
+	//	signuppage.selectcountrycode();
+	//}
+	
+	@When("user enters phoneNumber {string}")
+	public void user_enters_phone_number(String phonenumber1) {
+	   signuppage.enterPhoneNumber(phonenumber1);
+	}
+
+	@When("user enters password1st {string}")
+	public void user_enters_password1st(String passWord1) {
+	  signuppage.enterPassword(passWord1);
+	}
+
+	@When("user enters confirm password {string}")
+	public void user_enters_confirm_password(String passWordAgain1) throws Exception {
+	   signuppage.enterPasswordAgain(passWordAgain1);
+	}
+
+	@When("user clicks on checkbox of term and condition")
+	public void user_clicks_on_checkbox_of_term_and_condition() {
+	   signuppage.clickOnCheckbox();
+	}
+
+	@When("user clicks on Proceed To Sign up button")
+	public void user_clicks_on_proceed_to_sign_up_button() {
+	   signuppage.clickOnSignUPbutton();
+	}
 }

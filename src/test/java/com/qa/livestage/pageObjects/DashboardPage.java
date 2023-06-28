@@ -9,14 +9,20 @@ import org.openqa.selenium.WebElement;
 
 public class DashboardPage {
 
+	// 1. By Locators
 	public WebDriver driver;
 	private By dashboardSection=By.cssSelector("div#container-3 h4");
 	
+	
+	
+	// 2. Constructor of the page class
 	
 	public DashboardPage(WebDriver driver)
 	{
 		this.driver=driver;
 	}
+	
+	// 3. page actions : Feature
 	
 	public String getMyAccountPageTitle(){
 		

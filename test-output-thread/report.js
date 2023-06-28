@@ -1,15 +1,15 @@
 $(document).ready(function() {
 CucumberHTML.timelineItems.pushArray([
   {
-    "id": "5931db1f-4051-478c-b0dc-233ca79d736c",
+    "id": "526f45a8-6ff6-477e-bb6b-46e4db0bbd2f",
     "feature": "SignIn page feature",
-    "scenario": "Forgot password functionality",
-    "start": 1672419881814,
+    "scenario": "Forgot password functionality with Incorrect emailID",
+    "start": 1687956009111,
     "group": 1,
     "content": "",
     "tags": "@smoke,",
-    "end": 1672419890038,
-    "className": "failed"
+    "end": 1687956018507,
+    "className": "passed"
   }
 ]);
 CucumberHTML.timelineGroups.pushArray([

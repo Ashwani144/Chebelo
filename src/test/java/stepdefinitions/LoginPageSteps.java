@@ -20,27 +20,24 @@ import io.cucumber.messages.internal.com.google.protobuf.Duration;
 
 public class LoginPageSteps {
 
-
 	private static String title;
 	WebDriver driver;
 	private LoginPage loginPage=new LoginPage(DriverFactory.getDriver());
 	@Given("user is on login page")
 	public void user_is_on_login_page() {
 	 
-		DriverFactory.getDriver().get("https://app.staging.workstatus.io/auth/login");
+		DriverFactory.getDriver().get("https://app.newstaging.workstatus.io/auth/login");
 		
 	}
 
 	@When("user enters email {string}")
 	public void user_enters_email(String username) {
 		  loginPage.enterUserName(username);
-		  System.out.println("email is passed with values");
 	}
 
 	@When("user enters password {string}")
 	public void user_enters_password(String password1) {
 		  loginPage.enterPassword(password1);
-		  System.out.println("Password is passed with values");
 	}
 
 	/*@When("user clicks on ecaptcha button")
@@ -52,11 +49,10 @@ public class LoginPageSteps {
 	@When("user clicks on Login button")
 	public void user_clicks_on_login_button(){
 		 loginPage.clickOnLogin();
-		 System.out.println("Clicked on the Sign In button successfully");
 	}
 
 	@Then("user gets the title of the page")
-	public void user_gets_the_title_of_the_page(String expectedtitlename) {
+	public void user_gets_the_title_of_the_page() {
 	  title=loginPage.getLoginPageTitle();
       System.out.println("page title is: "+ title);
 		
@@ -65,18 +61,19 @@ public class LoginPageSteps {
 	@Then("page title should be {string}")
 	public void page_title_should_be(String expectedTitleName) {
 		Assert.assertTrue(title.contains(expectedTitleName));
-		System.out.println("Title page is matched :" + title);
+		System.out.println("Dashboard Title page is matched :" + title);
 	}
 	
 	/////////Login with Invalid Input- Step Definitions
 	
 	@When("user get the alert message pop up")
 	public void user_get_the_alert_message_pop_up() {
-	  
-		Alert alert = driver.switchTo().alert();
-		String alertMessage = driver.switchTo().alert().getText();
-		//String actualmessage = driver.findElement(By.xpath("//div[text()='Entered login details doesnt match with our records - please try again.']")).getText();
-		System.out.println(alertMessage);
+		
+		
+		String actualmessagText = loginPage.getalertMessagePopUp();
+		
+		
+		System.out.println("User get Pop up Message -Passed :" +actualmessagText); 
 	}
 
 
@@ -84,8 +81,10 @@ public class LoginPageSteps {
 	public void user_gets_the_popup_alert_message_should_be(String expectedMessage) {
 		
 		
-		String actualmessage = driver.findElement(By.xpath("//div[text()='Entered login details doesnt match with our records - please try again.']")).getText();
-		if(actualmessage.contains(expectedMessage))
+		 String expectedAlertMessage = "Entered login details doesnt match with our records - please try again.";
+		 String actualmessagText = loginPage.getalertMessagePopUp();
+		// String actualmessgae = driver.findElement(By.xpath("//div[text()='Entered login details doesnt match with our records - please try again.']")).getText();
+		if(actualmessagText.contains(expectedAlertMessage))
 		{
 			Assert.assertTrue(true);//pass
 			System.out.println("User get Pop up Message -Passed :" +expectedMessage);
@@ -116,8 +115,6 @@ public class LoginPageSteps {
 	
 	///////Forget Password Step Definitions
 	
-	
-	
 	@When("user click to forgot passoword button")
 	public void user_click_to_forgot_passoword_button() {
 	   loginPage.clickonForgetPassword();
@@ -133,4 +130,42 @@ public class LoginPageSteps {
 	public void user_click_to_send_reset_link() {
 	    loginPage.clickonsendresetlinkbutton();
 	}
+	
+	@Then("forgot your password link should be displayed")
+	public void forgot_your_password_link_should_be_displayed() {
+	    
+	}
+	
+	// To check when user enter the wrong email Id during the Forget Password 
+	
+	@Then("user get the alert message pop up with Incorrect emailId")
+	public void user_get_the_alert_message_pop_up_with_incorrect_email_id() {
+	  String actualalertmessage = loginPage.getAlertMessagewithInvalidEmail();
+		
+	  System.out.println("User get Pop up Message -Alert Message Information :" +actualalertmessage); 
+	}
+
+	@Then("user alert message should be {string}")
+	public void user_alert_message_should_be(String expectedMessageInfo) {
+	 
+		String expectedAlertMessage = "Email not found.";
+		String actualmessagText = loginPage.getAlertMessagewithInvalidEmail();
+		
+		if(actualmessagText.contains(expectedAlertMessage))
+		{
+			Assert.assertTrue(true);//pass
+			System.out.println("User get Pop up Message -Passed :" +expectedMessageInfo);
+			
+
+		}
+		else
+		{
+			Assert.assertTrue(false);//fail
+			System.out.println("User get Pop up Message -Failed :" +expectedMessageInfo);
+
+		}
+		
+	}
+
+	
 }

@@ -1,5 +1,6 @@
 Feature: SignIn page feature
 
+
 Scenario: Login with correct credentails 
 Given user is on login page
 When user enters email "ashwani.pandey@mail.vinove.com"
@@ -7,26 +8,39 @@ And user enters password "Pass@123"
 #And user clicks on ecaptcha button
 And user clicks on Login button
 Then user gets the title of the page
-And page title should be "Login - Workstatus"
+And page title should be "Workstatus"
 
 
 Scenario: Login with Incorrect credentails 
 Given user is on login page
 When user enters email "ashwani.pandey1@mail.vinove.com"
-And user enters password "Pass@123"
+And user enters password "Pass@321"
 And user clicks on Login button
 When user get the alert message pop up
 Then user gets the PopupAlert message should be "Entered login details doesnt match with our records - please try again."
 And user click on OK button
-And user returns back on login page
+Then user returns back on login page
 
 
-@smoke
+Scenario: Forgot password link
+Given user is on login page
+Then forgot your password link should be displayed
+
+
 Scenario: Forgot password functionality
 Given user is on login page
 When user click to forgot passoword button
 And user enters email of registered ID "pawan1@yopmail.com"
 And user click to Send Reset link
+
+@smoke
+Scenario: Forgot password functionality with Incorrect emailID
+Given user is on login page
+When user click to forgot passoword button
+And user enters email of registered ID "pawan1@yopmail.com"
+And user click to Send Reset link
+Then user get the alert message pop up with Incorrect emailId
+And user alert message should be "Email not found."
 
 
 
